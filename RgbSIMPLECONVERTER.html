@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+	<title>Convertidor de colores RGB</title>
+	<style>
+		.color-box {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Convertidor de colores RGB</h1>
+	
+	<!-- Convertir de RGB a un número entre 0 y 1 con decimales -->
+	<h2>Convertir de RGB a RGB L4D2</h2>
+	<label for="red">Rojo:</label>
+	<input type="range" id="red" name="red" min="0" max="255" oninput="updateColor()"><br>
+	<label for="green">Verde:</label>
+	<input type="range" id="green" name="green" min="0" max="255" oninput="updateColor()"><br>
+	<label for="blue">Azul:</label>
+	<input type="range" id="blue" name="blue" min="0" max="255" oninput="updateColor()"><br>
+	<div class="color-box" id="color-box"></div>
+	<label for="rgb">RGB:</label>
+	<input type="text" id="rgb" name="rgb" oninput="convertirRGB()"><br>
+	<button onclick="convertirRGB()">Convertir</button><br><br>
+	Resultado: <span id="resultadoRGB"></span>
+	
+	<script>
+		function convertirRGB() {
+			var red = document.getElementById("red").value;
+			var green = document.getElementById("green").value;
+			var blue = document.getElementById("blue").value;
+			var rgb = document.getElementById("rgb").value;
+			if (rgb != "") {
+				rgb = rgb.split(",");
+				if (rgb.length == 3) {
+					red = parseInt(rgb[0].trim());
+					green = parseInt(rgb[1].trim());
+					blue = parseInt(rgb[2].trim());
+				}
+			}
+			var resultadoRGB = "RGB(" + red + ", " + green + ", " + blue + ") equivale a (" + (red / 255).toFixed(2) + ", " + (green / 255).toFixed(2) + ", " + (blue / 255).toFixed(2) + ")";
+			document.getElementById("resultadoRGB").innerHTML = resultadoRGB;
+			updateColor();
+		}
+		
+		function updateColor() {
+			var red = document.getElementById("red").value;
+			var green = document.getElementById("green").value;
+			var blue = document.getElementById("blue").value;
+			var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+			document.getElementById("color-box").style.backgroundColor = color;
+		}
+	</script>
+    
+</body>
+</html>
+
